@@ -5,20 +5,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#04060c">
+<meta name="theme-color" content="#020604">
 <meta name="description" content="Gallery of animated ASCII wallpapers for Wallpaper Engine and the browser.">
 <title>ASCII Wallpapers — Gallery</title>
 <style>
   :root {
-    --bg: #04060c;
-    --bg-raised: #080e1a;
-    --panel: #0a1220;
-    --line: rgba(140, 170, 235, 0.18);
-    --line-strong: rgba(160, 195, 255, 0.4);
-    --text: #d6e2ff;
-    --muted: #8ea3c7;
-    --accent: #8fc2ff;
-    --accent-ink: #04101f;
+    --bg: #020604;
+    --panel: #04110a;
+    --panel-raised: #06180e;
+    --phosphor: #9cffb4;
+    --phosphor-bright: #d6ffe0;
+    --phosphor-dim: #5f9f72;
+    --amber: #ffc46b;
+    --line: rgba(156, 255, 180, 0.22);
+    --line-strong: rgba(156, 255, 180, 0.45);
+    --text: #d8ffe4;
+    --muted: #7fae8c;
+    --accent: #9cffb4;
+    --accent-ink: #021007;
   }
 
   *,
@@ -34,13 +38,15 @@
   body {
     margin: 0;
     min-height: 100vh;
-    background:
+    background-color: var(--bg);
+    background-image:
       radial-gradient(
         1200px 600px at 50% -10%,
-        rgba(70, 110, 200, 0.18),
+        rgba(60, 200, 110, 0.14),
         transparent 70%
       ),
-      var(--bg);
+      radial-gradient(rgba(156, 255, 180, 0.055) 1px, transparent 1px);
+    background-size: auto, 24px 24px;
     color: var(--text);
     font-family:
       ui-monospace,
@@ -53,9 +59,76 @@
     line-height: 1.5;
   }
 
+  ::selection {
+    background: var(--phosphor);
+    color: var(--bg);
+  }
+
+  .vignette,
+  .scanlines,
+  .crt-frame {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .vignette {
+    z-index: 2;
+    background: radial-gradient(
+      ellipse at 50% 45%,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+
+  .scanlines {
+    z-index: 3;
+    opacity: 0.22;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(156, 255, 180, 0.08) 0 1px,
+      transparent 1px 3px
+    );
+  }
+
+  .crt-frame {
+    z-index: 4;
+    inset: 10px;
+    border: 1px dashed var(--line-strong);
+  }
+
+  .crt-frame .corner {
+    position: absolute;
+    font: inherit;
+    line-height: 1;
+    color: var(--phosphor);
+  }
+
+  .crt-frame .tl {
+    top: -0.55em;
+    left: -0.35em;
+  }
+
+  .crt-frame .tr {
+    top: -0.55em;
+    right: -0.35em;
+  }
+
+  .crt-frame .bl {
+    bottom: -0.55em;
+    left: -0.35em;
+  }
+
+  .crt-frame .br {
+    bottom: -0.55em;
+    right: -0.35em;
+  }
+
   .site-header,
   main,
   .site-footer {
+    position: relative;
+    z-index: 1;
     max-width: 1180px;
     margin: 0 auto;
     padding-left: clamp(20px, 5vw, 48px);
@@ -66,18 +139,37 @@
     padding-top: clamp(40px, 8vw, 80px);
   }
 
-  .eyebrow {
-    margin: 0;
-    font-size: 0.72rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--accent);
+  .status-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 20px;
+    padding-bottom: 8px;
+    margin-bottom: 22px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--phosphor-dim);
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .ascii-logo {
+    margin: 0 0 18px;
+    font-family: inherit;
+    font-size: clamp(0.55rem, 1.6vw, 0.8rem);
+    line-height: 1.15;
+    color: var(--phosphor);
+    white-space: pre;
+    overflow: hidden;
   }
 
   h1 {
     margin: 0.4em 0;
-    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-size: clamp(1.8rem, 5vw, 3.1rem);
     line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--phosphor-bright);
+    text-shadow: 0 0 14px rgba(156, 255, 180, 0.35);
   }
 
   .lede {
@@ -87,11 +179,36 @@
     line-height: 1.6;
   }
 
+  .prompt {
+    margin: 18px 0 0;
+    font-size: 0.9rem;
+    color: var(--phosphor);
+  }
+
+  .cursor {
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--phosphor-bright);
+    animation: blink 1.2s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+    }
+  }
+
   .meta {
     margin: 1.2em 0 0;
     font-size: 0.8rem;
     letter-spacing: 0.06em;
-    color: var(--muted);
+    color: var(--phosphor-dim);
   }
 
   .gallery {
@@ -105,16 +222,34 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: linear-gradient(180deg, var(--bg-raised), var(--panel));
-    border: 1px solid var(--line);
-    border-radius: 10px;
+    background: linear-gradient(180deg, var(--panel-raised), var(--panel));
+    border: 1px dashed var(--line);
+    border-radius: 0;
+  }
+
+  .card-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--phosphor-dim);
+    white-space: nowrap;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .bar-line {
+    flex: 1;
+    min-width: 12px;
+    border-top: 1px dashed var(--line);
   }
 
   .stage {
     position: relative;
     aspect-ratio: 16 / 9;
-    background: #02040a;
-    border-bottom: 1px solid var(--line);
+    background: #010402;
+    border-bottom: 1px dashed var(--line);
   }
 
   .stage img {
@@ -124,9 +259,24 @@
     object-fit: cover;
   }
 
+  .stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.35;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(156, 255, 180, 0.08) 0 1px,
+      transparent 1px 3px
+    );
+  }
+
   .live-frame {
     position: absolute;
     inset: 0;
+    z-index: 1;
   }
 
   .live-frame[hidden] {
@@ -150,7 +300,14 @@
   .card h2 {
     margin: 0;
     font-size: 1.15rem;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--phosphor-bright);
+  }
+
+  .card h2::before {
+    content: '> ';
+    color: var(--phosphor-dim);
   }
 
   .card p {
@@ -163,52 +320,74 @@
   .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 10px;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .tags li {
-    padding: 2px 8px;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
+    padding: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--phosphor-dim);
+    border: 0;
+  }
+
+  .tags li::before {
+    content: '#';
+    color: var(--phosphor);
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 14px;
     margin-top: 4px;
   }
 
   .actions a,
   .actions button {
-    padding: 9px 14px;
+    display: inline-block;
+    padding: 2px 0;
     font: inherit;
     font-size: 0.85rem;
-    color: var(--text);
+    color: var(--phosphor);
     text-decoration: none;
     background: transparent;
-    border: 1px solid var(--line-strong);
-    border-radius: 6px;
+    border: 0;
     cursor: pointer;
   }
 
+  .actions a::before,
+  .actions button::before {
+    content: '[ ';
+  }
+
+  .actions a::after,
+  .actions button::after {
+    content: ' ]';
+  }
+
+  .actions a:hover {
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+  }
+
   .actions .live {
+    padding: 2px 8px;
     font-weight: 600;
     color: var(--accent-ink);
-    background: var(--accent);
-    border-color: transparent;
+    background: var(--phosphor);
+  }
+
+  .actions .live:hover {
+    background: var(--amber);
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    outline: 1px dashed var(--phosphor);
+    outline-offset: 3px;
   }
 
   .site-footer {
@@ -216,8 +395,8 @@
     padding-top: 20px;
     padding-bottom: 48px;
     font-size: 0.8rem;
-    color: var(--muted);
-    border-top: 1px solid var(--line);
+    color: var(--phosphor-dim);
+    border-top: 1px dashed var(--line);
   }
 
   .site-footer p {
@@ -225,28 +404,53 @@
   }
 
   .site-footer a {
-    color: var(--accent);
+    color: var(--phosphor);
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
   }
 
   .note {
+    position: relative;
+    z-index: 1;
     max-width: 1180px;
     margin: 16px auto 0;
     padding: 0 clamp(20px, 5vw, 48px);
     font-size: 0.85rem;
-    color: var(--muted);
+    color: var(--phosphor-dim);
   }
 </style>
 </head>
 <body>
+<div class="vignette" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="crt-frame" aria-hidden="true">
+  <span class="corner tl">+</span>
+  <span class="corner tr">+</span>
+  <span class="corner bl">+</span>
+  <span class="corner br">+</span>
+</div>
 <header class="site-header">
-  <p class="eyebrow">ASCII WALLPAPERS</p>
+  <div class="status-bar" aria-hidden="true">
+    <span>[ SYSTEM READY ]</span>
+    <span>[ OFFLINE ]</span>
+    <span>[ NO EXTERNAL I/O ]</span>
+  </div>
+  <pre class="ascii-logo" aria-hidden="true">+------------------+
+| ASCII WALLPAPERS |
++------------------+</pre>
   <h1>Wallpapers drawn with characters</h1>
   <p class="lede">Every planet, star and nebula is rendered with monospace glyphs on a canvas. Pick a wallpaper, preview it live, or open it full screen.</p>
+  <p class="prompt" aria-hidden="true">&gt; select a wallpaper<span class="cursor">_</span></p>
   <p class="meta">Offline · no dependencies · no build step</p>
 </header>
 <main>
   <section class="gallery" aria-label="Wallpapers">
     <article class="card" data-wallpaper="cosmos">
+      <div class="card-bar" aria-hidden="true">
+        <span>[ 001 ]</span>
+        <span class="bar-line"></span>
+        <span>[ READY ]</span>
+      </div>
       <div class="stage">
         <img src="wallpapers/cosmos/preview.jpg" width="640" height="360" alt="Preview of ASCII Cosmos">
         <div class="live-frame" id="live-cosmos" hidden></div>
@@ -267,6 +471,11 @@
       </div>
     </article>
     <article class="card" data-wallpaper="blackhole">
+      <div class="card-bar" aria-hidden="true">
+        <span>[ 002 ]</span>
+        <span class="bar-line"></span>
+        <span>[ READY ]</span>
+      </div>
       <div class="stage">
         <img src="wallpapers/blackhole/preview.jpg" width="640" height="360" alt="Preview of ASCII Black Hole">
         <div class="live-frame" id="live-blackhole" hidden></div>
@@ -289,11 +498,11 @@
   </section>
 </main>
 <footer class="site-footer">
-  <p>ASCII Wallpapers · MIT licensed · <a href="README.md">README</a></p>
+  <p><span aria-hidden="true">[ EOF ]</span> ASCII Wallpapers · MIT licensed · <a href="README.md">README</a></p>
 </footer>
 <noscript>
-  <style>.live { display: none; }</style>
-  <p class="note">Live preview needs JavaScript. Use Open to see the wallpaper animate.</p>
+  <style>.actions .live { display: none; }</style>
+  <p class="note"><span aria-hidden="true">[!] </span>Live preview needs JavaScript. Use Open to see the wallpaper animate.</p>
 </noscript>
 <script>
   (() => {
