@@ -1,0 +1,16 @@
+{
+  "name": "ascii-wallpapers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Animated ASCII wallpapers for Wallpaper Engine and the browser.",
+  "license": "MIT",
+  "author": "NemoKing1210 (https://github.com/NemoKing1210)",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "check": "node tools/check.mjs",
+    "serve": "node tools/serve.mjs"
+  }
+}

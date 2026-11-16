@@ -1,0 +1,57 @@
+{
+  "contentrating": "Everyone",
+  "description": "Animated ASCII-art cosmos: a drifting ringed gas giant, an icy world with a moon, nebula dust, twinkling stars and an occasional shooting star — all drawn with monospace glyphs.",
+  "file": "index.html",
+  "general": {
+    "properties": {
+      "schemecolor": {
+        "order": 0,
+        "text": "ui_browse_properties_scheme_color",
+        "type": "color",
+        "value": "0.05 0.08 0.18"
+      },
+      "accent": {
+        "order": 1,
+        "text": "Gas giant color",
+        "type": "color",
+        "value": "0.95 0.65 0.35"
+      },
+      "ice": {
+        "order": 2,
+        "text": "Ice planet color",
+        "type": "color",
+        "value": "0.35 0.78 0.80"
+      },
+      "stardensity": {
+        "order": 3,
+        "text": "Star density",
+        "type": "slider",
+        "value": 1,
+        "min": 0.2,
+        "max": 3,
+        "step": 0.1
+      },
+      "fontscale": {
+        "order": 4,
+        "text": "Glyph size",
+        "type": "slider",
+        "value": 1,
+        "min": 0.7,
+        "max": 1.8,
+        "step": 0.05
+      },
+      "twinkle": {
+        "order": 5,
+        "text": "Twinkling stars",
+        "type": "bool",
+        "value": true
+      }
+    },
+    "supportsaudioprocessing": false
+  },
+  "preview": "preview.jpg",
+  "tags": ["Space", "Abstract"],
+  "title": "ASCII Cosmos",
+  "type": "web",
+  "visibility": "private"
+}
