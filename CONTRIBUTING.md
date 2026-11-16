@@ -14,8 +14,9 @@ HTML/JS/CSS, so changes stay small and easy to review.
    `properties`.
 4. Work offline: no external requests, webfonts, CDNs or remote audio.
 5. Add a row for the wallpaper to the gallery table in every README
-   (`README*.md`). If you cannot translate, update `README.md` and mention it
-   in the pull request — translations can follow separately.
+   (`README*.md`) and a card to the root `index.html` gallery. If you cannot
+   translate, update `README.md` and mention it in the pull request —
+   translations can follow separately.
 6. Document the settings and rendering approach in the wallpaper's own
    `README.md`; use `wallpapers/cosmos/README.md` as a template.
 7. Optionally render an animated GIF into `previews/<name>.gif`.
@@ -85,7 +86,7 @@ validates:
 
 - required files and `project.json` fields for every wallpaper;
 - `preview.jpg` is a JPEG under 1 MB;
-- no external URLs in wallpaper assets;
+- no external URLs in wallpaper assets or the root gallery;
 - every README links to every translation and lists every wallpaper;
 - all local Markdown, image and HTML links resolve.
 
@@ -100,10 +101,12 @@ Never include exploit details in a public issue. The maintainer is
 ## Local preview
 
 ```bash
-npm run serve        # http://localhost:8123/wallpapers/cosmos/
+npm run serve        # http://localhost:8123/ (gallery)
 ```
 
-Any static server works too, for example `python -m http.server 8123`.
+Any static server works too, for example `python -m http.server 8123`. The
+gallery links to every wallpaper; a single wallpaper is at
+`http://localhost:8123/wallpapers/cosmos/`.
 
 ## Testing checklist
 
@@ -113,7 +116,7 @@ Any static server works too, for example `python -m http.server 8123`.
 - [ ] Every setting in the properties panel changes the scene.
 - [ ] No console errors and no network requests.
 - [ ] Frame time stays within budget.
-- [ ] README tables updated in every translation.
+- [ ] README tables and the root gallery card updated in every translation.
 
 By contributing you agree that your changes are released under the
 [MIT license](LICENSE).
@@ -130,8 +133,9 @@ By contributing you agree that your changes are released under the
    `preview.jpg`.
 3. Обновите `project.json` (название, описание, теги, превью, свойства).
 4. Никаких внешних запросов, шрифтов и аудио из сети.
-5. Добавьте строку в таблицу обоев во всех README (`README*.md`). Если перевод
-   сделать не получается, обновите `README.md` и укажите это в pull request.
+5. Добавьте строку в таблицу обоев во всех README (`README*.md`) и карточку в
+   галерею `index.html` в корне репозитория. Если перевод сделать не получается,
+   обновите `README.md` и укажите это в pull request.
 6. Опишите настройки и принцип рендеринга в README самих обоев — за образец
    можно взять `wallpapers/cosmos/README.md`.
 7. Запустите `npm run check`, проверьте в Wallpaper Engine и в браузере, затем
@@ -140,7 +144,8 @@ By contributing you agree that your changes are released under the
 Требования: 30–60 fps, до ~8 мс на кадр при 1080p, превью 1920×1080 (16:9) до
 1 МБ, без частого мигания (не чаще 3 Гц). Достаточно 2D canvas — WebGL не нужен.
 
-Локальный просмотр: `npm run serve` (или любой статический сервер). Проверка
+Локальный просмотр: `npm run serve` — галерея на <http://localhost:8123/> (или
+любой статический сервер). Проверка
 репозитория: `npm run check` — нужен Node.js 18 или новее, зависимостей
 устанавливать не требуется. Та же проверка запускается в CI.
 

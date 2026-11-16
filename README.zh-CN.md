@@ -32,6 +32,7 @@
 | 预览 | 壁纸 | 场景 |
 | :---: | --- | --- |
 | <img src="wallpapers/cosmos/preview.jpg" width="320" alt="ASCII Cosmos 预览"> | **[ASCII Cosmos](wallpapers/cosmos)** | 带光环的气态巨行星、带卫星的冰封行星、漂浮的星云尘埃、闪烁的恒星，以及偶尔划过的流星 |
+| <img src="wallpapers/blackhole/preview.jpg" width="320" alt="ASCII Black Hole 预览"> | **[ASCII Black Hole](wallpapers/blackhole)** | 带有明亮吸积盘、纤细光子环和围绕阴影弯曲的星光的黑洞 |
 
 ## 在 Wallpaper Engine 中安装
 
@@ -59,7 +60,8 @@ npm run serve
 # 或：python -m http.server 8123
 ```
 
-然后打开 <http://localhost:8123/wallpapers/cosmos/>。
+然后打开 <http://localhost:8123/> 查看所有壁纸的图库，或打开
+<http://localhost:8123/wallpapers/cosmos/> 查看单个壁纸。
 
 也可以直接打开 `wallpapers/cosmos/index.html`——无需构建步骤。加上
 `?freeze=1.5` 可渲染单帧确定性画面。
@@ -67,11 +69,13 @@ npm run serve
 ## 设置与实现细节
 
 每款壁纸都会在自己的 README 中说明其 Wallpaper Engine 属性和渲染原理——
-请参阅 [ASCII Cosmos](wallpapers/cosmos/README.md)。
+请参阅 [ASCII Cosmos](wallpapers/cosmos/README.md) 和
+[ASCII Black Hole](wallpapers/blackhole/README.md)。
 
 ## 仓库结构
 
 ```
+index.html         列出所有壁纸的图库
 wallpapers/<名称>/   自包含的 Wallpaper Engine 项目
 previews/            README 中使用的动态 GIF 预览
 tools/               校验与本地预览脚本
@@ -80,7 +84,8 @@ tools/               校验与本地预览脚本
 ## 添加你自己的壁纸
 
 参见 [CONTRIBUTING.md](CONTRIBUTING.md)。壁纸就是纯 HTML/JS，因此 Pull Request
-只需一个文件夹、一个 `project.json` 和一张预览图。
+只需一个文件夹、一个 `project.json`、一张预览图和根目录 `index.html` 图库中的
+一张卡片。
 
 ## 许可证
 

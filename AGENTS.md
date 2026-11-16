@@ -45,21 +45,25 @@ License: MIT — see [`LICENSE`](LICENSE). Maintainer:
 | `tools/serve.mjs` | Dependency-free static preview server |
 | `.github/workflows/check.yml` | CI: runs `npm run check` on push and pull request |
 | `README*.md` | Gallery and install guide in 8 languages |
+| `index.html` | Root gallery: static previews and on-demand live iframes |
 | `CONTRIBUTING.md` | Contribution rules, checks, translation matrix |
 | `SECURITY.md` | Private vulnerability reporting and scope |
 | `package.json` | Tooling scripts and Node engine requirement (no dependencies) |
 
-The only wallpaper today is `wallpapers/cosmos/`. Read its
-[README](wallpapers/cosmos/README.md) before touching its renderer.
+Wallpapers today: `wallpapers/cosmos/` and `wallpapers/blackhole/`. Read a
+wallpaper's README before touching its renderer.
 
 ## Quick start
 
 Requires Node.js 18+ for tooling; nothing to install.
 
 ```bash
-npm run serve   # http://localhost:8123/wallpapers/cosmos/
+npm run serve   # http://localhost:8123/ (gallery)
 npm run check   # validate wallpapers, translations and local links
 ```
+
+The root gallery lists every wallpaper with a static preview and can run one
+live preview at a time.
 
 Any static server works, for example `python -m http.server 8123`. A wallpaper
 can also be opened directly via `wallpapers/cosmos/index.html`, because it has
@@ -77,7 +81,10 @@ step or remote styles.
 
 ### `main.js`
 
-One IIFE, no imports. Structure, top to bottom:
+One IIFE, no imports. The structure below describes Cosmos; Black Hole shares
+the same invariants (offscreen background, capped FPS/DPR, freeze hook) with
+its own disk and halo pipeline, documented in its
+[README](wallpapers/blackhole/README.md). Structure, top to bottom:
 
 1. **Constants** — background color, glyph ramps, light direction, target FPS.
 2. **`SETTINGS`** — user-facing values mirrored from Wallpaper Engine:
@@ -106,6 +113,9 @@ For each frame: fill background → blit the offscreen nebula with a parallax
 offset → draw twinkling stars → draw planets (far ring half, sphere, near ring
 half, moon) → draw the shooting star. Keep this order unless the change is
 intentional; overlapping layers depend on it.
+
+Black Hole uses a different order: background → lensed stars → halo → disk →
+shadow → near half of the disk → photon ring.
 
 ### Time and determinism
 
@@ -164,8 +174,10 @@ consider it released.
    `properties`. Keep `"file": "index.html"` unless the entry point differs.
 4. Keep it offline. The check script fails on remote `src`/`href`/`fetch`/
    `@import`.
-5. Add a row to the wallpaper table in **every** root `README*.md`:
-   a preview image and a link to the wallpaper folder.
+5. Add a row to the wallpaper table in **every** root `README*.md` and a
+   card to the root `index.html` gallery: a preview image and a link to the
+   wallpaper folder. The check script fails if the gallery does not mention
+   the folder.
 6. Write `wallpapers/<name>/README.md` using the Cosmos README as a template:
    settings table, install, browser preview, how it works, files, license.
 7. Optionally produce `previews/<name>.gif` (current GIFs are 960×540).
@@ -213,6 +225,7 @@ Always report what you actually ran and what you did not.
 ```bash
 npm run check
 node --check wallpapers/cosmos/main.js
+node --check wallpapers/blackhole/main.js
 node --check tools/check.mjs
 node --check tools/serve.mjs
 ```
@@ -220,7 +233,7 @@ node --check tools/serve.mjs
 `npm run check` should end with:
 
 ```
-✓ 1 wallpaper, 8 READMEs, all local links resolve.
+✓ 2 wallpapers, 8 READMEs, all local links resolve.
 ```
 
 The count changes when a wallpaper or translation is added.
@@ -233,6 +246,10 @@ npm run serve
 
 Open `http://localhost:8123/wallpapers/cosmos/` and confirm there are no
 console errors and no network requests other than local files.
+
+Open `http://localhost:8123/`, confirm both cards render, click **Live
+preview** on one card, then on the other, and press Escape. At most one
+iframe may exist at any time and the console must stay clean.
 
 ### Visual regression with the freeze hook
 

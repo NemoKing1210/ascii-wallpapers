@@ -48,6 +48,14 @@ const REQUIRED_PROJECT_KEYS = [
   'type',
 ];
 
+/* Every served file must stay offline: no remote styles, scripts or media. */
+const EXTERNAL = [
+  /\b(?:src|srcset|href|data-src|poster)\s*=\s*["']\s*(?:https?:)?\/\//i,
+  /\b(?:fetch|importScripts)\s*\(\s*["'`]\s*(?:https?:)?\/\//i,
+  /@import\s+(?:url\()?["']?\s*(?:https?:)?\/\//i,
+  /url\(\s*["']?\s*(?:https?:)?\/\//i,
+];
+
 for (const name of wallpapers) {
   const dir = resolve(wallpaperRoot, name);
 
@@ -95,17 +103,67 @@ for (const name of wallpapers) {
     }
   }
 
-  /* Each wallpaper must stay offline: no remote styles, scripts or media. */
-  const EXTERNAL = [
-    /\b(?:src|href)\s*=\s*["']https?:\/\//i,
-    /\bfetch\s*\(\s*["'`]https?:\/\//i,
-    /@import\s+(?:url\()?["']?https?:\/\//i,
-  ];
   for (const file of readdirSync(dir)) {
     if (!['.html', '.css', '.js', '.mjs'].includes(extname(file).toLowerCase())) continue;
     const text = readFileSync(resolve(dir, file), 'utf8');
     if (EXTERNAL.some((pattern) => pattern.test(text))) {
       fail(`wallpapers/${name}/${file}: contains an external URL`);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Root gallery
+ * ------------------------------------------------------------------ */
+
+const galleryPath = resolve(root, 'index.html');
+if (!isFile(galleryPath)) {
+  fail('missing index.html gallery');
+} else {
+  const gallery = readFileSync(galleryPath, 'utf8');
+
+  if (EXTERNAL.some((pattern) => pattern.test(gallery))) {
+    fail('index.html: contains an external URL');
+  }
+
+  /* Every local src/href/data-src target must resolve from the root. */
+  for (const match of gallery.matchAll(/\b(?:src|href|data-src)\s*=\s*"([^"]+)"/g)) {
+    const link = match[1];
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(link)) continue;
+
+    let path;
+    try {
+      path = decodeURIComponent(link.split('#')[0].split('?')[0]);
+    } catch {
+      fail(`index.html: invalid link ${link}`);
+      continue;
+    }
+    if (path && !existsSync(resolve(root, path))) {
+      fail(`index.html: broken link ${link}`);
+    }
+  }
+
+  /* Every wallpaper needs a complete card; stale cards are rejected too. */
+  for (const name of wallpapers) {
+    for (const expected of [
+      `data-wallpaper="${name}"`,
+      `src="wallpapers/${name}/preview.jpg"`,
+      `data-src="wallpapers/${name}/"`,
+      `href="wallpapers/${name}/"`,
+      `href="wallpapers/${name}/README.md"`,
+    ]) {
+      if (!gallery.includes(expected)) {
+        fail(`index.html: missing ${expected} for wallpapers/${name}`);
+      }
+    }
+  }
+
+  const listed = new Set(
+    [...gallery.matchAll(/data-wallpaper="([^"]+)"/g)].map((match) => match[1]),
+  );
+  for (const name of listed) {
+    if (!wallpapers.includes(name)) {
+      fail(`index.html: unknown wallpaper "${name}"`);
     }
   }
 }

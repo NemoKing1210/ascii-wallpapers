@@ -36,6 +36,7 @@ No images, no video, no network requests: each wallpaper is a self-contained web
 | Preview | Wallpaper | Scene |
 | :---: | --- | --- |
 | <img src="wallpapers/cosmos/preview.jpg" width="320" alt="ASCII Cosmos preview"> | **[ASCII Cosmos](wallpapers/cosmos)** | A ringed gas giant, an icy planet with a moon, drifting nebula dust, twinkling stars and the occasional shooting star |
+| <img src="wallpapers/blackhole/preview.jpg" width="320" alt="ASCII Black Hole preview"> | **[ASCII Black Hole](wallpapers/blackhole)** | A black hole with a glowing accretion disk, a thin photon ring and starlight bent around its shadow |
 
 ## Install in Wallpaper Engine
 
@@ -64,7 +65,8 @@ npm run serve
 # or: python -m http.server 8123
 ```
 
-Then open <http://localhost:8123/wallpapers/cosmos/>.
+Then open <http://localhost:8123/> for the gallery of every wallpaper, or
+<http://localhost:8123/wallpapers/cosmos/> for a single one.
 
 You can also open `wallpapers/cosmos/index.html` directly — there is no build
 step. Add `?freeze=1.5` to render a single deterministic frame.
@@ -72,11 +74,13 @@ step. Add `?freeze=1.5` to render a single deterministic frame.
 ## Settings and internals
 
 Each wallpaper documents its Wallpaper Engine properties and rendering
-technique in its own README — see [ASCII Cosmos](wallpapers/cosmos/README.md).
+technique in its own README — see [ASCII Cosmos](wallpapers/cosmos/README.md)
+and [ASCII Black Hole](wallpapers/blackhole/README.md).
 
 ## Repository layout
 
 ```
+index.html           root gallery listing every wallpaper
 wallpapers/<name>/   self-contained Wallpaper Engine projects
 previews/            animated GIF previews used in the READMEs
 tools/               validation and local preview scripts
@@ -85,7 +89,8 @@ tools/               validation and local preview scripts
 ## Add your own wallpaper
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Wallpapers are plain HTML/JS, so a pull
-request only needs a folder, a `project.json` and a preview image.
+request only needs a folder, a `project.json`, a preview image and a card in the
+root `index.html` gallery.
 
 ## License
 

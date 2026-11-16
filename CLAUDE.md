@@ -26,15 +26,18 @@ verification. Read it before making changes.
 
 | Task | Command |
 | --- | --- |
-| Serve wallpapers locally | `npm run serve` → <http://localhost:8123/wallpapers/cosmos/> |
+| Serve wallpapers locally | `npm run serve` → <http://localhost:8123/> (gallery) · <http://localhost:8123/wallpapers/cosmos/> · <http://localhost:8123/wallpapers/blackhole/> |
 | Validate repo, docs and links | `npm run check` |
-| Syntax-check the renderer | `node --check wallpapers/cosmos/main.js` |
+| Syntax-check a renderer | `node --check wallpapers/cosmos/main.js` · `node --check wallpapers/blackhole/main.js` |
 | Deterministic frame | `.../index.html?freeze=1.5` |
 | CI equivalent | `npm run check` on Node 20 |
 
 There is nothing to install; Node.js 18+ is enough.
 
 ## Where to change what
+
+The examples below use `wallpapers/cosmos/`; `wallpapers/blackhole/` follows
+the same folder contract with its own `SETTINGS`, property keys and README.
 
 - **Colors, star density, glyph size, twinkle** — `SETTINGS` defaults in
   `wallpapers/cosmos/main.js`, matching `value` entries in `project.json`, and
@@ -49,6 +52,9 @@ There is nothing to install; Node.js 18+ is enough.
   cell sizes derive from `fontPx`, and window resize is debounced.
 - **Timing** — work in seconds; keep `S.frozen` suppressing `Math.random`
   events so `?freeze=` stays deterministic.
+- **Root gallery** — `index.html`; static cards must list every wallpaper,
+  only one live iframe may exist at a time, and `tools/check.mjs` enforces
+  coverage.
 - **Page metadata, overlays, fallback** — `wallpapers/cosmos/index.html`; keep
   CSS inline and the canvas decorative (`aria-hidden`).
 - **Validation rules** — `tools/check.mjs`; keep it dependency-free, fast and

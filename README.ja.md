@@ -35,6 +35,7 @@
 | プレビュー | 壁紙 | シーン |
 | :---: | --- | --- |
 | <img src="wallpapers/cosmos/preview.jpg" width="320" alt="ASCII Cosmos プレビュー"> | **[ASCII Cosmos](wallpapers/cosmos)** | 輪を持つガス惑星、衛星を伴う氷の惑星、漂う星雲の塵、またたく星々、ときどき流れる流星 |
+| <img src="wallpapers/blackhole/preview.jpg" width="320" alt="ASCII Black Hole プレビュー"> | **[ASCII Black Hole](wallpapers/blackhole)** | 輝く降着円盤、細い光子リング、影の周りで曲がる星の光を備えたブラックホール |
 
 ## Wallpaper Engine へのインストール
 
@@ -62,7 +63,8 @@ npm run serve
 # または: python -m http.server 8123
 ```
 
-その後 <http://localhost:8123/wallpapers/cosmos/> を開きます。
+その後 <http://localhost:8123/> で全壁紙のギャラリーを、
+<http://localhost:8123/wallpapers/cosmos/> で個別の壁紙を開けます。
 
 `wallpapers/cosmos/index.html` を直接開いてもかまいません（ビルド不要）。
 `?freeze=1.5` を付けると 1 フレームだけ決定的に描画します。
@@ -70,12 +72,13 @@ npm run serve
 ## 設定と内部の仕組み
 
 各壁紙の Wallpaper Engine プロパティとレンダリング手法は、それぞれの README
-にまとめてあります — [ASCII Cosmos](wallpapers/cosmos/README.md) を参照して
-ください。
+にまとめてあります — [ASCII Cosmos](wallpapers/cosmos/README.md) と
+[ASCII Black Hole](wallpapers/blackhole/README.md) を参照してください。
 
 ## リポジトリ構成
 
 ```
+index.html          全壁紙のギャラリー
 wallpapers/<name>/   自己完結した Wallpaper Engine プロジェクト
 previews/            README で使うアニメーション GIF プレビュー
 tools/               検証とローカルプレビュー用スクリプト
@@ -84,8 +87,8 @@ tools/               検証とローカルプレビュー用スクリプト
 ## 自分の壁紙を追加する
 
 [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。壁紙は素の HTML/JS
-なので、プルリクエストに必要なのはフォルダ、`project.json`、プレビュー画像
-だけです。
+なので、プルリクエストに必要なのはフォルダ、`project.json`、プレビュー画像、
+そしてルートの `index.html` ギャラリーのカードです。
 
 ## ライセンス
 

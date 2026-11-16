@@ -36,6 +36,7 @@ Sem imagens, sem vídeo e sem requisições de rede: cada papel de parede é um 
 | Prévia | Papel de parede | Cena |
 | :---: | --- | --- |
 | <img src="wallpapers/cosmos/preview.jpg" width="320" alt="Prévia do ASCII Cosmos"> | **[ASCII Cosmos](wallpapers/cosmos)** | Um gigante gasoso com anéis, um planeta gelado com sua lua, poeira de nebulosa à deriva, estrelas cintilantes e uma estrela cadente de vez em quando |
+| <img src="wallpapers/blackhole/preview.jpg" width="320" alt="Prévia do ASCII Black Hole"> | **[ASCII Black Hole](wallpapers/blackhole)** | Um buraco negro com um disco de acreção luminoso, um fino anel de fótons e luz estelar curvada ao redor de sua sombra |
 
 ## Instalação no Wallpaper Engine
 
@@ -65,7 +66,8 @@ npm run serve
 # ou: python -m http.server 8123
 ```
 
-Depois abra <http://localhost:8123/wallpapers/cosmos/>.
+Depois abra <http://localhost:8123/> para a galeria de todos os papéis de
+parede, ou <http://localhost:8123/wallpapers/cosmos/> para um deles.
 
 Você também pode abrir `wallpapers/cosmos/index.html` diretamente — não há etapa
 de build. Adicione `?freeze=1.5` para renderizar um único quadro determinístico.
@@ -74,11 +76,13 @@ de build. Adicione `?freeze=1.5` para renderizar um único quadro determinístic
 
 Cada papel de parede documenta suas propriedades do Wallpaper Engine e sua
 técnica de renderização no próprio README — veja
-[ASCII Cosmos](wallpapers/cosmos/README.md).
+[ASCII Cosmos](wallpapers/cosmos/README.md) e
+[ASCII Black Hole](wallpapers/blackhole/README.md).
 
 ## Estrutura do repositório
 
 ```
+index.html           galeria com todos os papéis de parede
 wallpapers/<nome>/   projetos autônomos do Wallpaper Engine
 previews/            prévias em GIF animado usadas nos READMEs
 tools/               scripts de validação e pré-visualização local
@@ -87,8 +91,8 @@ tools/               scripts de validação e pré-visualização local
 ## Adicione seu próprio papel de parede
 
 Veja [CONTRIBUTING.md](CONTRIBUTING.md). Os papéis de parede são HTML/JS simples,
-então um pull request só precisa de uma pasta, um `project.json` e uma imagem de
-prévia.
+então um pull request só precisa de uma pasta, um `project.json`, uma imagem de
+prévia e um cartão na galeria `index.html` da raiz.
 
 ## Licença
 

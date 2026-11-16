@@ -36,6 +36,7 @@ Aucune image, aucune vidéo, aucune requête réseau : chaque fond d'écran est 
 | Aperçu | Fond d'écran | Scène |
 | :---: | --- | --- |
 | <img src="wallpapers/cosmos/preview.jpg" width="320" alt="Aperçu d'ASCII Cosmos"> | **[ASCII Cosmos](wallpapers/cosmos)** | Une géante gazeuse entourée d'anneaux, une planète glacée et sa lune, de la poussière de nébuleuse en dérive, des étoiles scintillantes et une étoile filante de temps en temps |
+| <img src="wallpapers/blackhole/preview.jpg" width="320" alt="Aperçu d'ASCII Black Hole"> | **[ASCII Black Hole](wallpapers/blackhole)** | Un trou noir avec un disque d'accrétion lumineux, un fin anneau de photons et la lumière des étoiles courbée autour de son ombre |
 
 ## Installation dans Wallpaper Engine
 
@@ -64,7 +65,8 @@ npm run serve
 # ou : python -m http.server 8123
 ```
 
-Ouvrez ensuite <http://localhost:8123/wallpapers/cosmos/>.
+Ouvrez ensuite <http://localhost:8123/> pour la galerie de tous les fonds
+d'écran, ou <http://localhost:8123/wallpapers/cosmos/> pour un seul.
 
 Vous pouvez aussi ouvrir `wallpapers/cosmos/index.html` directement : aucune
 étape de build n'est nécessaire. Ajoutez `?freeze=1.5` pour rendre une seule
@@ -73,11 +75,13 @@ image déterministe.
 ## Réglages et détails internes
 
 Chaque fond d'écran documente ses propriétés Wallpaper Engine et sa technique de
-rendu dans son propre README — voir [ASCII Cosmos](wallpapers/cosmos/README.md).
+rendu dans son propre README — voir [ASCII Cosmos](wallpapers/cosmos/README.md)
+et [ASCII Black Hole](wallpapers/blackhole/README.md).
 
 ## Structure du dépôt
 
 ```
+index.html          galerie de tous les fonds d'écran
 wallpapers/<nom>/   projets Wallpaper Engine autonomes
 previews/           aperçus GIF animés utilisés dans les README
 tools/              scripts de validation et d'aperçu local
@@ -86,8 +90,8 @@ tools/              scripts de validation et d'aperçu local
 ## Ajouter votre propre fond d'écran
 
 Voir [CONTRIBUTING.md](CONTRIBUTING.md). Les fonds d'écran sont du HTML/JS
-simple : une pull request n'a besoin que d'un dossier, d'un `project.json` et
-d'une image d'aperçu.
+simple : une pull request n'a besoin que d'un dossier, d'un `project.json`, d'une
+image d'aperçu et d'une carte dans la galerie `index.html` à la racine.
 
 ## Licence
 

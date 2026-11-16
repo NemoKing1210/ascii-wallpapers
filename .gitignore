@@ -1,6 +1,7 @@
 # Superpowers working artifacts (local only)
 docs/superpowers/
 superpowers/
+.superpowers/
 
 # OS junk
 Thumbs.db

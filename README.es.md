@@ -37,6 +37,7 @@ Sin imágenes, sin vídeo y sin peticiones de red: cada fondo de pantalla es un 
 | Vista previa | Fondo de pantalla | Escena |
 | :---: | --- | --- |
 | <img src="wallpapers/cosmos/preview.jpg" width="320" alt="Vista previa de ASCII Cosmos"> | **[ASCII Cosmos](wallpapers/cosmos)** | Un gigante gaseoso con anillos, un planeta helado con su luna, polvo de nebulosa a la deriva, estrellas parpadeantes y alguna estrella fugaz |
+| <img src="wallpapers/blackhole/preview.jpg" width="320" alt="Vista previa de ASCII Black Hole"> | **[ASCII Black Hole](wallpapers/blackhole)** | Un agujero negro con un disco de acreción luminoso, un fino anillo de fotones y luz estelar curvada alrededor de su sombra |
 
 ## Instalación en Wallpaper Engine
 
@@ -65,7 +66,8 @@ npm run serve
 # o: python -m http.server 8123
 ```
 
-Después abre <http://localhost:8123/wallpapers/cosmos/>.
+Después abre <http://localhost:8123/> para ver la galería de todos los fondos,
+o <http://localhost:8123/wallpapers/cosmos/> para uno solo.
 
 También puedes abrir `wallpapers/cosmos/index.html` directamente: no hay paso de
 compilación. Añade `?freeze=1.5` para renderizar un único fotograma determinista.
@@ -74,11 +76,13 @@ compilación. Añade `?freeze=1.5` para renderizar un único fotograma determini
 
 Cada fondo de pantalla documenta sus propiedades de Wallpaper Engine y su técnica
 de renderizado en su propio README — consulta
-[ASCII Cosmos](wallpapers/cosmos/README.md).
+[ASCII Cosmos](wallpapers/cosmos/README.md) y
+[ASCII Black Hole](wallpapers/blackhole/README.md).
 
 ## Estructura del repositorio
 
 ```
+index.html             galería raíz con todos los fondos
 wallpapers/<nombre>/   proyectos autónomos para Wallpaper Engine
 previews/              vistas previas GIF animadas usadas en los README
 tools/                 scripts de validación y vista previa local
@@ -87,8 +91,8 @@ tools/                 scripts de validación y vista previa local
 ## Añade tu propio fondo de pantalla
 
 Consulta [CONTRIBUTING.md](CONTRIBUTING.md). Los fondos de pantalla son HTML/JS
-normal, así que un pull request solo necesita una carpeta, un `project.json` y una
-imagen de vista previa.
+normal, así que un pull request solo necesita una carpeta, un `project.json`, una
+imagen de vista previa y una tarjeta en la galería `index.html` de la raíz.
 
 ## Licencia
 

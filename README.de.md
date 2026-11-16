@@ -36,6 +36,7 @@ Keine Bilder, keine Videos, keine Netzwerkanfragen: Jedes Wallpaper ist ein eige
 | Vorschau | Wallpaper | Szene |
 | :---: | --- | --- |
 | <img src="wallpapers/cosmos/preview.jpg" width="320" alt="ASCII-Cosmos-Vorschau"> | **[ASCII Cosmos](wallpapers/cosmos)** | Ein geringelter Gasriese, ein Eisplanet mit Mond, treibender Nebelstaub, funkelnde Sterne und gelegentlich eine Sternschnuppe |
+| <img src="wallpapers/blackhole/preview.jpg" width="320" alt="ASCII-Black-Hole-Vorschau"> | **[ASCII Black Hole](wallpapers/blackhole)** | Ein Schwarzes Loch mit leuchtender Akkretionsscheibe, dünnem Photonenring und um den Schatten gebeugtem Sternenlicht |
 
 ## Installation in Wallpaper Engine
 
@@ -65,7 +66,8 @@ npm run serve
 # oder: python -m http.server 8123
 ```
 
-Danach <http://localhost:8123/wallpapers/cosmos/> öffnen.
+Danach <http://localhost:8123/> für die Galerie aller Wallpaper öffnen — oder
+<http://localhost:8123/wallpapers/cosmos/> für ein einzelnes.
 
 Du kannst `wallpapers/cosmos/index.html` auch direkt öffnen — ein Build-Schritt
 ist nicht nötig. Mit `?freeze=1.5` wird ein einzelnes deterministisches Frame
@@ -75,11 +77,13 @@ gerendert.
 
 Jedes Wallpaper dokumentiert seine Wallpaper-Engine-Eigenschaften und seine
 Rendering-Technik in einer eigenen README — siehe
-[ASCII Cosmos](wallpapers/cosmos/README.md).
+[ASCII Cosmos](wallpapers/cosmos/README.md) und
+[ASCII Black Hole](wallpapers/blackhole/README.md).
 
 ## Repository-Struktur
 
 ```
+index.html           Galerie aller Wallpaper
 wallpapers/<name>/   eigenständige Wallpaper-Engine-Projekte
 previews/            animierte GIF-Vorschauen für die READMEs
 tools/               Prüf- und lokale Vorschau-Skripte
@@ -88,7 +92,8 @@ tools/               Prüf- und lokale Vorschau-Skripte
 ## Eigenes Wallpaper hinzufügen
 
 Siehe [CONTRIBUTING.md](CONTRIBUTING.md). Wallpaper sind reines HTML/JS — ein
-Pull Request braucht nur einen Ordner, eine `project.json` und ein Vorschaubild.
+Pull Request braucht nur einen Ordner, eine `project.json`, ein Vorschaubild und
+eine Karte in der Galerie `index.html` im Wurzelverzeichnis.
 
 ## Lizenz
 
